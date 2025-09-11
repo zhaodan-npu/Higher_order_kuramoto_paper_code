@@ -1,0 +1,10 @@
+Generate Spike Data:
+spike_task_spilt
+simulate_1000_paths
+
+
+Process Data and Extract Spike Features:
+plot_amplitude+count:process the raw data to calculate the required statistics.
+
+Generate the Final Plot:
+fig10_read：generate the plot for Figure 10

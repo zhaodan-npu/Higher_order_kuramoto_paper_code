@@ -1,0 +1,8 @@
+window_2: divide the spike data to get multiple windows
+
+edacf+edpsec:
+process_path_1.jl
+run_process_1.sh
+editdistance.jl:from Power spectral estimate for discrete data, Chaos, 33(5), 053118 (2023). DOI:10.1063/5.0143224
+
+plot_window_5:plot

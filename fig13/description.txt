@@ -1,0 +1,26 @@
+1. Generate sequence
+
+generate_levy.py: In conjunction with the .sh script, this generates a Lévy noise sequence with a scale consistent with the Kuramoto model. The output file includes time and noise_value.
+
+generate_levy.sh
+
+2. Identify spikes based on a threshold
+
+extract_noise_spikes_global_2.py: Identifies spikes based on the 80th percentile threshold.
+
+3. Segment into windows
+
+window_3_noise.jl: Segments the data into different windows with an interval of 200. 
+
+4. Calculate EDACF and EDSPEC for segmented windows
+
+run_noise_windows.sh
+
+submit_noise_batches.sh
+
+process_noise_windows.jl
+
+5. Plot the results
+
+plot_window_5.py: Generates plots based on the calculation results.
+

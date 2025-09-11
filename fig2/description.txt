@@ -1,0 +1,4 @@
+│   ├── 01_run_simulation_slice.py   # Step 1: Simulates a single slice of the parameter space
+│   ├── 02_merge_and_save.py         # Step 2: Merges all slices into one .txt file
+│   └── 03_plot_figure2.py           # Step 3: Reads the .txt file and generates plots for Figure 2
+├── submit_hpc_job.sh                # Example script to submit the simulation job to a Slurm cluster

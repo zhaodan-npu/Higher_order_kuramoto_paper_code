@@ -1,0 +1,10 @@
+This figure is generated using a two-step, multi-language workflow. First, raw spike data is analyzed in parallel on an HPC cluster using Julia. Second, the results are aggregated, averaged, and plotted locally using Python.
+
+We have already generated the raw spike data.
+
+Analyze spike data to calculate the EDACF and EDSPEC:
+
+sinle_path_all_revised.jl: need editdistance.jl (Power spectral estimate for discrete data, Chaos, 33(5), 053118 (2023). DOI:10.1063/5.0143224)
+run_edacf_edspec.sh
+
+plot: plot_edacf_edspec_5fitting.py

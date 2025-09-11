@@ -1,0 +1,9 @@
+For the response sequence:
+
+distribution_2-copy: Segments the data based on spike events, calculates the inter-spike interval (ISI) distribution, and saves the data.
+
+plot_fitting_3.py: Plots the Probability Density Function (PDF) based on the saved interval data.
+
+For the noise sequence:
+
+distribution_levy_2: Reads the spike data from the noise sequence and plots its PDF.
