@@ -8,3 +8,4 @@ sinle_path_all_revised.jl: need editdistance.jl (Power spectral estimate for dis
 run_edacf_edspec.sh
 
 plot: plot_edacf_edspec_5fitting.py
+plot: plot_edacf_edspec_6fitting.py--add the power-law regression and statistical error.

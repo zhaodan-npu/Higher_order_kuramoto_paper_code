@@ -93,7 +93,7 @@ if __name__ == '__main__':
     K2_vals = np.linspace( 0, 10.0, 100)
 
 
-    N               = 100
+    N               = 200
     num_samples     = 25
     dt              = 0.01
     transient_steps = 100_000

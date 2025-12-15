@@ -8,9 +8,9 @@ from scipy.ndimage import gaussian_filter
 import cmcrameri.cm as cm
 
 
-results_dir = Path("results")
+results_dir = Path("results_sto")
 out_pdf     = Path("order_param_heatmap_batlow_smoothed22.pdf")
-
+out_png     = Path("order_param_heatmap_batlow_smoothed22.png")  # 新增这一行
 
 files = sorted(results_dir.glob('order_k1_*.npz'))
 if not files:
@@ -76,4 +76,8 @@ ax.yaxis.set_major_locator(plt.MaxNLocator(6))
 
 plt.tight_layout()
 fig.savefig(out_pdf, format='pdf', bbox_inches='tight')
+fig.savefig(out_png, format='png', bbox_inches='tight', dpi=300)  # 再保存一个 png
+plt.close(fig)
+
 print(f"Smoothed heatmap saved to {out_pdf}")
+print(f"Smoothed heatmap saved to {out_png}")

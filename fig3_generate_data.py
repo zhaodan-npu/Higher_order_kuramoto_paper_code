@@ -4,11 +4,11 @@ from numba import njit, prange
 from scipy.stats import gaussian_kde, levy_stable
 
 plt.rcParams["font.family"] = "Times New Roman"
-plt.rcParams["axes.labelsize"] = 14
-plt.rcParams["axes.titlesize"] = 14
-plt.rcParams["xtick.labelsize"] = 12
-plt.rcParams["ytick.labelsize"] = 12
-plt.rcParams["legend.fontsize"] = 12
+plt.rcParams["axes.labelsize"] = 14   # 坐标轴标签字体大小
+plt.rcParams["axes.titlesize"] = 14   # 坐标轴标题字体大小
+plt.rcParams["xtick.labelsize"] = 12  # X轴刻度字体大小
+plt.rcParams["ytick.labelsize"] = 12  # Y轴刻度字体大小
+plt.rcParams["legend.fontsize"] = 12  # 图例字体大小
 
 @njit(parallel=True)
 def kuramoto_derivatives(theta, omega, K1, K2):
@@ -98,7 +98,8 @@ def simulate(theta0, omega, K1, K2, dt, T, sigma, alpha, T_trans):
     # Run the sampling period
     for t in range(T - T_trans):
         rk4_step(theta, omega, K1, K2, dt)
-        noise = sigma * levy_stable.rvs(alpha, 0, size=theta.shape) *  (dt**(1/alpha))
+        noise = sigma * levy_stable.rvs(alpha, 0, size=theta.shape) * (dt ** (1 / alpha))
+        theta += noise  # <-- make sure you add the noise
         mod_2pi(theta)
         r_all[:, t] = order_parameter(theta)
 
@@ -106,7 +107,7 @@ def simulate(theta0, omega, K1, K2, dt, T, sigma, alpha, T_trans):
 
 def main():
     N = 100
-    num_realizations = 10
+    num_realizations = 100
     K1 = 0.8
     K2 = 8.0
     dt = 0.01
@@ -114,7 +115,7 @@ def main():
     T_trans = int(1e5)  # Transient period
     sigma_det = 0.0
     sigma_rand = 0.5
-    alpha = 1.2  # Lévy noise parameter
+    alpha = 1.4 # Lévy noise parameter
 
     theta_initial = 2 * np.pi * np.random.rand(num_realizations, N)
     omega_values = np.random.standard_cauchy((num_realizations, N))
@@ -144,16 +145,16 @@ def main():
     np.savetxt(f'r_all_rand.txt', r_all_rand, fmt='%.6f')
     plt.savefig(f'plot0.pdf')
 
-    # plt.figure(figsize=(10, 6))
-    # plt.plot(time, avg_r_det, label='Deterministic (sigma=0)', lw=2)
-    # plt.plot(time, avg_r_rand, label='Random (sigma=0.1)', lw=2)
-    # plt.xlabel("Time")
-    # plt.ylabel("Average Order Parameter r")
-    # plt.legend(loc='best')
-    # plt.tight_layout()
-    # np.savetxt(f'avg_r_det.txt', avg_r_det, fmt='%.6f')
-    # np.savetxt(f'avg_r_rand.txt', avg_r_rand, fmt='%.6f')
-    # plt.savefig(f'plot1.pdf')
+    plt.figure(figsize=(10, 6))
+    plt.plot(time, avg_r_det, label='Deterministic (sigma=0)', lw=2)
+    plt.plot(time, avg_r_rand, label='Random (sigma=0.1)', lw=2)
+    plt.xlabel("Time")
+    plt.ylabel("Average Order Parameter r")
+    plt.legend(loc='best')
+    plt.tight_layout()
+    np.savetxt(f'avg_r_det.txt', avg_r_det, fmt='%.6f')
+    np.savetxt(f'avg_r_rand.txt', avg_r_rand, fmt='%.6f')
+    plt.savefig(f'plot1.pdf')
 
     all_r_det = r_all_det.flatten()
     all_r_rand = r_all_rand.flatten()
